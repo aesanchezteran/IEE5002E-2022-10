@@ -124,7 +124,9 @@ int KEYPDLEDOutputExample(void){
 			while (1) {
 				/* Write output to the Columns */
 				XGpio_DiscreteWrite(&Kypd_Gpio, KEYPAD_COLS_CH, cols);
-
+				
+				Delay();
+				
 				// Read the rows
 				rows = XGpio_DiscreteRead(&Kypd_Gpio, KEYPAD_ROWS_CH);
 
@@ -211,15 +213,9 @@ int KEYPDLEDOutputExample(void){
 				/* Write output to the LEDs. */
 				XGpio_DiscreteWrite(&Leds_Gpio, LED_CHANNEL, led);
 
-				if(cols == 0x7){
-					cols = 0xe;
-				}
-				else{
 					// Shift the '0' in the cols to the left
 					cols_msb = (cols >> 3) & 1;  // Saving the msb of cols
 					cols = (cols << 1) | cols_msb; // rotate the 4 bit so cols to the left
-				}
-				}
 			}
 
 
